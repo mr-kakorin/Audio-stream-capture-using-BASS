@@ -4,8 +4,11 @@
 
 class AudioStream {
 public:
+	bool PlayStream();
+	bool SetStream(const char*);
 	AudioStream(const char*);
 	~AudioStream();
+
 private:
 	class AudioStreamObj {
 		std::shared_ptr<HSTREAM> stream;
@@ -14,6 +17,8 @@ private:
 		AudioStreamObj(const char*);
 		AudioStreamObj();
 		~AudioStreamObj();
+		void FreeStream();
+
 	};
-	AudioStreamObj Stream;
+	AudioStreamObj* pStream;
 };

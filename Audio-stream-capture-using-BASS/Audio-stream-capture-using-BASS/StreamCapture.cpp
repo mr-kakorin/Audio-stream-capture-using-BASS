@@ -3,7 +3,7 @@
 
 StreamCapture::StreamCapture()
 {
-	(BASS_Init(-1, 44100, 0, 0, NULL)) ? Capturer : throw "Bass could not init";	
+	(BASS_Init(-1, 44100, 0, 0, NULL)) ? pCapturer : throw "Bass could not init";	
 }
 
 StreamCapture::~StreamCapture()

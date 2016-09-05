@@ -11,6 +11,7 @@ public:
 	~StreamCapture();
 	
 	AudioStream GetStream(const char*);
+
 private:
 	class StreamCaptureObj
 	{
@@ -19,5 +20,5 @@ private:
 		StreamCaptureObj();
 		~StreamCaptureObj();
 	};
-	StreamCaptureObj Capturer;
+	StreamCaptureObj* pCapturer;
 };

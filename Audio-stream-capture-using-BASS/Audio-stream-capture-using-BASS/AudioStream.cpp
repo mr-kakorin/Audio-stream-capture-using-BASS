@@ -25,11 +25,17 @@ AudioStream::AudioStreamObj::AudioStreamObj()
 {
 }
 
+void AudioStream::AudioStreamObj::FreeStream()
+{
+	BASS_ChannelStop(*stream);
+	BASS_SampleFree(*stream);
+	delete &ci;
+}
+
 AudioStream::AudioStreamObj::~AudioStreamObj()
 {
 	try {
-		BASS_ChannelStop(*stream);
-		BASS_SampleFree(*stream);
+		FreeStream();
 	}
 	catch (...)
 	{
@@ -39,12 +45,24 @@ AudioStream::AudioStreamObj::~AudioStreamObj()
 	ci.~shared_ptr();
 }
 
+bool AudioStream::PlayStream()
+{
+	return true;
+}
+
+bool AudioStream::SetStream(const char* fileName)
+{
+	pStream->~AudioStreamObj();
+	pStream = new AudioStreamObj(fileName);
+	return true;
+}
+
 AudioStream::AudioStream(const char * fileName)
 {
-	AudioStreamObj Stream(fileName);
+	AudioStreamObj pStream(fileName);
 }
 
 AudioStream::~AudioStream()
 {
-	Stream.~AudioStreamObj();
+	pStream->~AudioStreamObj();
 }
